@@ -6,9 +6,10 @@
 #
 # Example:
 # source(system.file("paper-examples/reproduce-paper-plots.R", package = "causalcp"))
+# paper_dir <- getwd()
 # reproduce_paper_plots(
-#   paper_dir = "/Users/vic/Documents/OW_realdata",
-#   output_dir = "/Users/vic/Documents/OW_realdata/paper_demo_outputs"
+#   paper_dir = paper_dir,
+#   output_dir = file.path(paper_dir, "paper_demo_outputs")
 # )
 
 load_cp_dataframe <- function(file) {

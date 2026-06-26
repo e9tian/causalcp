@@ -132,7 +132,7 @@ or other models and then pass the resulting columns to the plotting functions.
 The package includes a script showing how the paper figures can be generated
 from existing analysis outputs using the package API.
 
-From the `OW_realdata` paper directory:
+From the paper analysis directory, run:
 
 ```r
 library(causalcp)
@@ -142,11 +142,16 @@ source(system.file(
   package = "causalcp"
 ))
 
+paper_dir <- getwd()
+
 reproduce_paper_plots(
-  paper_dir = "/Users/vic/Documents/OW_realdata",
-  output_dir = "/Users/vic/Documents/OW_realdata/paper_demo_outputs"
+  paper_dir = paper_dir,
+  output_dir = file.path(paper_dir, "paper_demo_outputs")
 )
 ```
+
+If you are running R from another directory, set `paper_dir` to your local path
+to the paper analysis folder before calling `reproduce_paper_plots()`.
 
 This creates package-based versions of:
 
