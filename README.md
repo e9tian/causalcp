@@ -175,18 +175,6 @@ This creates package-based versions of:
 The outputs are written to `paper_demo_outputs/` in the current working
 directory.
 
-If you locally regenerate the paper analysis outputs and want to use those
-instead of the bundled copies, pass `paper_dir` explicitly:
-
-```r
-paper_dir <- "/path/to/your/paper-analysis-directory"
-
-reproduce_paper_plots(
-  paper_dir = paper_dir,
-  output_dir = file.path(paper_dir, "paper_demo_outputs")
-)
-```
-
 ## Citation
 
 ```r
