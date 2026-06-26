@@ -62,7 +62,15 @@ local_cp_plot <- function(data, ehat, tau_c_hat, pi_c_hat, group = NULL,
       title = title
     ) +
     ggplot2::theme_minimal() +
-    ggplot2::theme(legend.position = "bottom") +
+    ggplot2::theme(
+      legend.position = "bottom",
+      legend.box = "vertical"
+    ) +
+    ggplot2::guides(
+      shape = ggplot2::guide_legend(order = 1, override.aes = list(alpha = 1, size = 2)),
+      color = ggplot2::guide_legend(order = 2, ncol = 1),
+      linetype = ggplot2::guide_legend(order = 2, ncol = 1)
+    ) +
     ggplot2::geom_hline(yintercept = 0, linetype = "solid", color = "black", alpha = 0.7)
 
   new_causalcp_result(plot = p, slopes = slopes, data_used = plot_df)
