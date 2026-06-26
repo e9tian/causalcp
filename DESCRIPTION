@@ -1,0 +1,32 @@
+Package: causalcp
+Title: Causal CP-Plot Diagnostics
+Version: 0.0.0.9000
+Authors@R: c(
+    person("Pengfei", "Tian", email = "e9tian@gmail.com", role = c("aut", "cre")),
+    person("Fan", "Yang", role = "aut"),
+    person("Peng", "Ding", role = "aut")
+  )
+Author: Pengfei Tian [aut, cre],
+  Fan Yang [aut],
+  Peng Ding [aut]
+Maintainer: Pengfei Tian <e9tian@gmail.com>
+Description: Tools for drawing CATE-propensity-score plots and local IV
+    complier-weighted CP plots as diagnostic visualizations for causal
+    treatment effect heterogeneity and bracketing relationships. The package
+    accompanies Tian, Yang, and Ding (2026), "Bracketing Relationships of
+    Weighted Average Treatment Effects", arXiv:2606.11715.
+License: MIT + file LICENSE
+URL: https://arxiv.org/abs/2606.11715
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Imports:
+    ggplot2,
+    stats,
+    utils
+Suggests:
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown
+Config/testthat/edition: 3
+VignetteBuilder: knitr

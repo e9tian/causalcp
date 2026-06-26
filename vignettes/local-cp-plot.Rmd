@@ -1,0 +1,30 @@
+---
+title: "Local CP Plot"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Local CP Plot}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r}
+library(causalcp)
+
+set.seed(2)
+n <- 300
+df <- data.frame(x = rnorm(n))
+df$z <- rbinom(n, 1, plogis(df$x))
+df$ehat <- plogis(df$x)
+df$pi_c_hat <- pmax(0.05, plogis(-0.5 + df$x))
+df$tau_c_hat <- 1 + 0.5 * df$x
+
+fit <- local_cp_plot(
+  df,
+  ehat = "ehat",
+  tau_c_hat = "tau_c_hat",
+  pi_c_hat = "pi_c_hat",
+  group = "z"
+)
+fit$plot
+fit$slopes
+```

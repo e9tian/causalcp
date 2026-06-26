@@ -1,0 +1,23 @@
+---
+title: "CP Plot"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{CP Plot}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r}
+library(causalcp)
+
+set.seed(1)
+n <- 300
+df <- data.frame(x = rnorm(n))
+df$z <- rbinom(n, 1, plogis(df$x))
+df$ehat <- plogis(df$x)
+df$tau_hat <- 1 + df$x
+
+fit <- cp_plot(df, ehat = "ehat", tau_hat = "tau_hat", treat = "z")
+fit$plot
+fit$slopes
+```
