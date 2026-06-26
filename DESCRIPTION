@@ -25,6 +25,7 @@ Imports:
     stats,
     utils
 Suggests:
+    gridExtra,
     testthat (>= 3.0.0),
     knitr,
     rmarkdown

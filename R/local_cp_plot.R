@@ -50,9 +50,10 @@ local_cp_plot <- function(data, ehat, tau_c_hat, pi_c_hat, group = NULL,
       inherit.aes = FALSE,
       linewidth = 0.75
     ) +
-    ggplot2::scale_color_manual(values = colors, name = "Linear fit") +
+    ggplot2::scale_color_manual(values = colors, breaks = labels, name = "Linear fit") +
     ggplot2::scale_linetype_manual(
       values = stats::setNames(c("solid", "dashed", "dotdash")[seq_along(labels)], labels),
+      breaks = labels,
       name = "Linear fit"
     ) +
     ggplot2::labs(
