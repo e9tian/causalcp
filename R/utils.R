@@ -62,28 +62,50 @@ line_palette <- function(labels) {
   stats::setNames(c("#D55E00", "#0072B2", "#009E73")[seq_along(labels)], labels)
 }
 
+fit_line <- function(fit_data, response, e_grid, weights = NULL) {
+  if (!is.null(weights)) {
+    if (any(weights < 0, na.rm = TRUE)) {
+      stop("weights must be nonnegative.", call. = FALSE)
+    }
+    ok <- is.finite(weights) & weights > 0
+    fit_data <- fit_data[ok, , drop = FALSE]
+    weights <- weights[ok]
+  }
+
+  line_y <- rep(NA_real_, length(e_grid))
+  if (nrow(fit_data) < 2L || length(unique(fit_data$ehat)) < 2L) {
+    return(line_y)
+  }
+
+  fit_args <- list(
+    formula = stats::as.formula(paste(response, "~ ehat")),
+    data = fit_data
+  )
+  if (!is.null(weights)) {
+    fit_args$weights <- weights
+  }
+
+  fit <- do.call(stats::lm, fit_args)
+  as.numeric(stats::predict(fit, newdata = data.frame(ehat = e_grid)))
+}
+
 cp_line_data <- function(plot_df, labels, e_grid, point_labels, weighted = FALSE) {
   y_col <- if (weighted) "tau_c_hat" else "tau_hat"
-  do.call(rbind, lapply(labels, function(lbl) {
-    if (lbl == "All units") {
-      fit_data <- plot_df
-    } else if (lbl == "Treated units") {
-      fit_data <- plot_df[plot_df$group == point_labels[[2L]], , drop = FALSE]
+  do.call(rbind, lapply(seq_along(labels), function(i) {
+    if (weighted) {
+      weights <- switch(
+        i,
+        plot_df$pi_c_hat,
+        plot_df$pi_c_hat * plot_df$ehat,
+        plot_df$pi_c_hat * (1 - plot_df$ehat)
+      )
+      line_y <- fit_line(plot_df, response = y_col, e_grid = e_grid, weights = weights)
     } else {
-      fit_data <- plot_df[plot_df$group == point_labels[[1L]], , drop = FALSE]
+      weights <- switch(i, NULL, plot_df$ehat, 1 - plot_df$ehat)
+      line_y <- fit_line(plot_df, response = y_col, e_grid = e_grid, weights = weights)
     }
 
-    line_y <- rep(NA_real_, length(e_grid))
-    if (nrow(fit_data) >= 2L && length(unique(fit_data$ehat)) >= 2L) {
-      if (weighted) {
-        fit <- stats::lm(tau_c_hat ~ ehat, data = fit_data, weights = pi_c_hat)
-      } else {
-        fit <- stats::lm(tau_hat ~ ehat, data = fit_data)
-      }
-      line_y <- as.numeric(stats::predict(fit, newdata = data.frame(ehat = e_grid)))
-    }
-
-    out <- data.frame(ehat = e_grid, fit = lbl)
+    out <- data.frame(ehat = e_grid, fit = labels[[i]])
     out[[y_col]] <- line_y
     out
   }))

@@ -19,7 +19,24 @@ test_that("cp_plot supports treated and control point labels", {
   )
   fit <- cp_plot(df, ehat = "ehat", tau_hat = "tau", treat = "z")
   expect_equal(levels(fit$data_used$group), c("Control", "Treated"))
-  expect_equal(fit$slopes$fit, c("All units", "Treated units", "Control units"))
+  expect_equal(fit$slopes$fit, c("Unweighted", "Treated weighted", "Control weighted"))
+})
+
+test_that("cp_plot lines use the same full-sample weighted fits as cp_slopes", {
+  e <- c(0.2, 0.4, 0.6, 0.8)
+  df <- data.frame(
+    ehat = rep(e, 2),
+    tau = c(1 + 2 * e, 1 - 3 * e + c(0.2, -0.1, 0.1, -0.2)),
+    z = rep(c(0, 1), each = 4)
+  )
+  fit <- cp_plot(df, ehat = "ehat", tau_hat = "tau", treat = "z")
+  built <- ggplot2::ggplot_build(fit$plot)
+  line_data <- built$data[[2]]
+  line_slopes <- vapply(split(line_data, line_data$group), function(d) {
+    unname(coef(stats::lm(y ~ x, data = d))[["x"]])
+  }, numeric(1))
+  names(line_slopes) <- fit$slopes$fit
+  expect_equal(unname(line_slopes), fit$slopes$slope, tolerance = 1e-8)
 })
 
 test_that("local_cp_plot returns weighted local CP diagnostics", {
@@ -34,5 +51,5 @@ test_that("local_cp_plot returns weighted local CP diagnostics", {
   fit <- local_cp_plot(df, ehat = "ehat", tau_c_hat = "tau_c", pi_c_hat = "pi_c", group = "z")
   expect_s3_class(fit, "causalcp_result")
   expect_equal(levels(fit$data_used$group), c("Control", "Treated"))
-  expect_equal(fit$slopes$fit, c("All units", "Treated units", "Control units"))
+  expect_equal(fit$slopes$fit, c("Complier weighted", "Treated-complier weighted", "Control-complier weighted"))
 })

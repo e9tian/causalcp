@@ -113,7 +113,7 @@ make_observational_cp_panel <- function(paper_dir, output_dir) {
   }))
 
   line_colors <- c("#D55E00", "#0072B2", "#009E73")
-  line_labels <- c("All data", "Treated units", "Control units")
+  line_labels <- c("Unweighted", "Treated weighted", "Control weighted")
 
   legend <- grid::grobTree(
     grid::textGrob("Points:", x = grid::unit(0.11, "npc"), y = grid::unit(0.72, "npc"), just = "right", gp = grid::gpar(fontsize = 11)),

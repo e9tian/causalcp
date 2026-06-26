@@ -1,4 +1,16 @@
 fit_slope <- function(data, weights = NULL, label) {
+  if (!is.null(weights)) {
+    if (length(weights) != nrow(data)) {
+      stop("weights must have one value per row.", call. = FALSE)
+    }
+    if (any(weights < 0, na.rm = TRUE)) {
+      stop("weights must be nonnegative.", call. = FALSE)
+    }
+    ok <- is.finite(weights) & weights > 0
+    data <- data[ok, , drop = FALSE]
+    weights <- weights[ok]
+  }
+
   out <- data.frame(
     fit = label,
     n = nrow(data),
@@ -37,15 +49,18 @@ cp_slopes <- function(data, ehat, tau_hat, treat = NULL) {
   }
 
   df <- data.frame(e = e[ok], tau = tau[ok])
-  if (is.null(z)) {
-    return(fit_slope(data.frame(y = df$tau, x = df$e), label = "All units"))
-  }
-
-  df$z <- z[ok]
   out <- rbind(
-    fit_slope(data.frame(y = df$tau, x = df$e), label = "All units"),
-    fit_slope(data.frame(y = df$tau[df$z == 1], x = df$e[df$z == 1]), label = "Treated units"),
-    fit_slope(data.frame(y = df$tau[df$z == 0], x = df$e[df$z == 0]), label = "Control units")
+    fit_slope(data.frame(y = df$tau, x = df$e), label = "Unweighted"),
+    fit_slope(
+      data.frame(y = df$tau, x = df$e),
+      weights = df$e,
+      label = "Treated weighted"
+    ),
+    fit_slope(
+      data.frame(y = df$tau, x = df$e),
+      weights = 1 - df$e,
+      label = "Control weighted"
+    )
   )
   rownames(out) <- NULL
   out
@@ -63,22 +78,21 @@ local_cp_slopes <- function(data, ehat, tau_c_hat, pi_c_hat, group = NULL) {
   }
 
   df <- data.frame(e = e[ok], tau = tau[ok], pi_c = pi_c[ok])
-  if (is.null(z)) {
-    return(fit_slope(data.frame(y = df$tau, x = df$e), weights = df$pi_c, label = "All units"))
-  }
-
-  df$z <- z[ok]
   out <- rbind(
-    fit_slope(data.frame(y = df$tau, x = df$e), weights = df$pi_c, label = "All units"),
     fit_slope(
-      data.frame(y = df$tau[df$z == 1], x = df$e[df$z == 1]),
-      weights = df$pi_c[df$z == 1],
-      label = "Treated units"
+      data.frame(y = df$tau, x = df$e),
+      weights = df$pi_c,
+      label = "Complier weighted"
     ),
     fit_slope(
-      data.frame(y = df$tau[df$z == 0], x = df$e[df$z == 0]),
-      weights = df$pi_c[df$z == 0],
-      label = "Control units"
+      data.frame(y = df$tau, x = df$e),
+      weights = df$pi_c * df$e,
+      label = "Treated-complier weighted"
+    ),
+    fit_slope(
+      data.frame(y = df$tau, x = df$e),
+      weights = df$pi_c * (1 - df$e),
+      label = "Control-complier weighted"
     )
   )
   rownames(out) <- NULL

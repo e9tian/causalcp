@@ -22,6 +22,7 @@ A \code{causalcp_result} object with elements \code{plot}, \code{slopes}, and
 }
 \description{
 Draws a diagnostic plot of estimated CATEs against estimated propensity scores
-and adds linear fits using all units and, when \code{treat} is supplied, treated
-and control subsamples.
+and adds full-sample linear fits with weights \eqn{1}, \eqn{\hat e(X)}, and
+\eqn{1-\hat e(X)}. When \code{treat} is supplied, it controls the point shapes
+but not the regression samples.
 }

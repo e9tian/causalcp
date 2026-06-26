@@ -23,5 +23,8 @@ A \code{causalcp_result} object with elements \code{plot}, \code{slopes}, and
 }
 \description{
 Draws a diagnostic plot of modeled conditional Wald estimates against estimated
-IV propensity scores and adds \code{pi_c_hat}-weighted linear fits.
+IV propensity scores and adds full-sample weighted linear fits with weights
+\eqn{\hat\pi^c(X)}, \eqn{\hat\pi^c(X)\hat e(X)}, and
+\eqn{\hat\pi^c(X)\{1-\hat e(X)\}}. When \code{group} is supplied, it controls
+the point shapes but not the regression samples.
 }

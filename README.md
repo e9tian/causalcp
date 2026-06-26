@@ -50,8 +50,8 @@ fit$slopes
 The returned object has three components:
 
 - `fit$plot`: the `ggplot` object.
-- `fit$slopes`: slopes for the all-units, treated-units, and control-units
-  linear fits.
+- `fit$slopes`: slopes for the unweighted, treated-weighted, and
+  control-weighted full-sample linear fits.
 - `fit$data_used`: the finite observations used in the plot.
 
 ## Local CP Plot for IV Studies

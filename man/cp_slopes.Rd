@@ -15,5 +15,7 @@ A data frame with fit label, sample size, slope, standard error, and p-value.
 }
 \description{
 Computes slopes from linear regressions of estimated CATEs on estimated
-propensity scores using all units and, when available, treatment subsamples.
+propensity scores using full-sample fits with weights \eqn{1},
+\eqn{\hat e(X)}, and \eqn{1-\hat e(X)}. When \code{treat} is supplied, it is
+used only to keep the finite analysis sample aligned with the plotted points.
 }

@@ -17,5 +17,8 @@ p-value.
 }
 \description{
 Computes \code{pi_c_hat}-weighted slopes from linear regressions of estimated
-conditional complier treatment effects on estimated IV propensity scores.
+conditional complier treatment effects on estimated IV propensity scores using
+full-sample weights \eqn{\hat\pi^c(X)}, \eqn{\hat\pi^c(X)\hat e(X)}, and
+\eqn{\hat\pi^c(X)\{1-\hat e(X)\}}. When \code{group} is supplied, it is used
+only to keep the finite analysis sample aligned with the plotted points.
 }
