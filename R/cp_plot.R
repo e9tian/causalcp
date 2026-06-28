@@ -58,5 +58,5 @@ cp_plot <- function(data, ehat, tau_hat, treat = NULL,
     ggplot2::theme(legend.position = "bottom") +
     ggplot2::geom_hline(yintercept = 0, linetype = "solid", color = "black", alpha = 0.7)
 
-  new_causalcp_result(plot = p, slopes = slopes, data_used = plot_df)
+  new_CPplot_result(plot = p, slopes = slopes, data_used = plot_df)
 }

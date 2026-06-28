@@ -18,7 +18,7 @@ local_cp_plot(data, ehat, tau_c_hat, pi_c_hat, group = NULL,
 \item{point_size}{Point size.}
 }
 \value{
-A \code{causalcp_result} object with elements \code{plot}, \code{slopes}, and
+A \code{CPplot_result} object with elements \code{plot}, \code{slopes}, and
 \code{data_used}.
 }
 \description{

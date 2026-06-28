@@ -21,7 +21,7 @@ paper_cp_descriptions <- c(
 )
 
 paper_data_dir <- function() {
-  system.file("extdata/paper", package = "causalcp", mustWork = TRUE)
+  system.file("extdata/paper", package = "CPplot", mustWork = TRUE)
 }
 
 paper_datasets <- function() {

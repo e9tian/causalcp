@@ -1,4 +1,4 @@
 library(testthat)
-library(causalcp)
+library(CPplot)
 
-test_check("causalcp")
+test_check("CPplot")

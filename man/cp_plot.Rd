@@ -17,7 +17,7 @@ cp_plot(data, ehat, tau_hat, treat = NULL,
 \item{point_size}{Point size.}
 }
 \value{
-A \code{causalcp_result} object with elements \code{plot}, \code{slopes}, and
+A \code{CPplot_result} object with elements \code{plot}, \code{slopes}, and
 \code{data_used}.
 }
 \description{

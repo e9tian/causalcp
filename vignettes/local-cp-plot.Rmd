@@ -8,7 +8,7 @@ vignette: >
 ---
 
 ```{r}
-library(causalcp)
+library(CPplot)
 
 set.seed(2)
 n <- 800

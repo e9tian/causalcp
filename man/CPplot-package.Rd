@@ -1,5 +1,5 @@
-\name{causalcp-package}
-\alias{causalcp-package}
+\name{CPplot-package}
+\alias{CPplot-package}
 \docType{package}
 \title{Causal CP-Plot Diagnostics}
 \description{

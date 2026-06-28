@@ -24,7 +24,7 @@ paper data directory. \code{load_paper_cp_data()} and
 \code{load_paper_401k_data()} return data frames.
 }
 \description{
-Access the intermediate data bundled with \code{causalcp} for reproducing the
+Access the intermediate data bundled with \code{CPplot} for reproducing the
 paper diagnostic plots. These are the estimated propensity scores, treatment
 effect summaries, and local IV summaries used by the paper demo, not the full
 raw-data analysis workflow.

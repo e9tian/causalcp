@@ -1,12 +1,12 @@
-\name{causalcp_result}
-\alias{causalcp_result}
-\alias{print.causalcp_result}
+\name{CPplot_result}
+\alias{CPplot_result}
+\alias{print.CPplot_result}
 \title{Causal CP result object}
 \usage{
-\method{print}{causalcp_result}(x, ...)
+\method{print}{CPplot_result}(x, ...)
 }
 \arguments{
-\item{x}{A \code{causalcp_result} object.}
+\item{x}{A \code{CPplot_result} object.}
 \item{...}{Unused.}
 }
 \value{

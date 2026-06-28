@@ -1,4 +1,4 @@
-citHeader("To cite causalcp, please cite the paper that introduced the CP-plot diagnostics:")
+citHeader("To cite CPplot, please cite the paper that introduced the CP-plot diagnostics:")
 
 bibentry(
   bibtype = "Misc",

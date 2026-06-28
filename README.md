@@ -1,6 +1,6 @@
-# causalcp
+# CPplot
 
-`causalcp` draws CP plots and local CP plots for causal diagnostic summaries.
+`CPplot` draws CP plots and local CP plots for causal diagnostic summaries.
 It is developed for the paper:
 
 > Pengfei Tian, Fan Yang, and Peng Ding. "Bracketing Relationships of Weighted
@@ -14,7 +14,8 @@ their own preferred models.
 
 ## Installation
 
-Install from GitHub:
+Install from GitHub. The repository is still named `causalcp`, but it installs
+the R package `CPplot`:
 
 ```r
 install.packages("remotes")
@@ -27,7 +28,7 @@ For observational studies, use `cp_plot()` after estimating the propensity
 score \(\hat e(X)\) and CATE \(\hat\tau(X)\) for each unit.
 
 ```r
-library(causalcp)
+library(CPplot)
 
 set.seed(1)
 n <- 800
@@ -92,7 +93,7 @@ The package includes simple transparent helpers for quick examples. The code
 blocks below are self-contained and can be copied directly into R.
 
 ```r
-library(causalcp)
+library(CPplot)
 
 set.seed(3)
 n <- 500
@@ -112,7 +113,7 @@ fit$slopes
 For IV examples:
 
 ```r
-library(causalcp)
+library(CPplot)
 
 set.seed(4)
 n <- 800
@@ -157,7 +158,7 @@ Part 1 shows which bundled paper datasets are available and how to load them.
 Use `paper_datasets()` as the index of datasets and loader functions:
 
 ```r
-library(causalcp)
+library(CPplot)
 
 paper_datasets()[, c("name", "type", "loader")]
 
@@ -178,11 +179,11 @@ Part 2 reproduces the paper demo plots from those bundled intermediate
 datasets:
 
 ```r
-library(causalcp)
+library(CPplot)
 
 source(system.file(
   "paper-examples/reproduce-paper-plots.R",
-  package = "causalcp"
+  package = "CPplot"
 ))
 
 reproduce_paper_plots()
@@ -200,5 +201,5 @@ directory.
 ## Citation
 
 ```r
-citation("causalcp")
+citation("CPplot")
 ```

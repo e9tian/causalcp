@@ -1,4 +1,4 @@
-# Reproduce paper diagnostic plots with causalcp.
+# Reproduce paper diagnostic plots with CPplot.
 #
 # By default, this script uses the paper intermediate outputs bundled with the
 # package:
@@ -6,13 +6,13 @@
 # - tab_401k_unit_conditional_wald.csv
 #
 # Example:
-# source(system.file("paper-examples/reproduce-paper-plots.R", package = "causalcp"))
+# source(system.file("paper-examples/reproduce-paper-plots.R", package = "CPplot"))
 # reproduce_paper_plots()
 #
 # To use locally regenerated paper outputs instead, pass paper_dir explicitly.
 
 bundled_paper_dir <- function() {
-  causalcp::paper_data_dir()
+  CPplot::paper_data_dir()
 }
 
 load_cp_dataframe <- function(file) {
@@ -75,7 +75,7 @@ make_paper_cp_plot <- function(file) {
     setting
   }
 
-  fit <- causalcp::cp_plot(
+  fit <- CPplot::cp_plot(
     df,
     ehat = "propensity_scores",
     tau_hat = "tau_hat",
@@ -141,10 +141,10 @@ make_observational_cp_panel <- function(paper_dir, output_dir) {
   )
   combined <- gridExtra::arrangeGrob(title, panel, legend, ncol = 1, heights = c(0.045, 0.86, 0.095))
 
-  pdf_file <- file.path(output_dir, "combined_4x2_causalcp.pdf")
+  pdf_file <- file.path(output_dir, "combined_4x2_CPplot.pdf")
   ggplot2::ggsave(pdf_file, combined, width = 12, height = 12.8)
 
-  slopes_file <- file.path(output_dir, "combined_4x2_causalcp_slopes.csv")
+  slopes_file <- file.path(output_dir, "combined_4x2_CPplot_slopes.csv")
   utils::write.csv(slopes, slopes_file, row.names = FALSE)
 
   list(plot_file = pdf_file, slopes_file = slopes_file, slopes = slopes)
@@ -162,7 +162,7 @@ make_401k_local_cp_plot <- function(paper_dir, output_dir) {
     stop("Missing required columns in ", csv_file, ": ", paste(required, collapse = ", "), call. = FALSE)
   }
 
-  fit <- causalcp::local_cp_plot(
+  fit <- CPplot::local_cp_plot(
     unit_summary,
     ehat = "ehat",
     tau_c_hat = "tau_c_hat",
@@ -171,10 +171,10 @@ make_401k_local_cp_plot <- function(paper_dir, output_dir) {
     title = expression(paste("401(k) application: local CP plot of ", hat(tau)^c * (X), " vs ", hat(e)(X)))
   )
 
-  pdf_file <- file.path(output_dir, "fig_401k_unit_conditional_wald_causalcp.pdf")
+  pdf_file <- file.path(output_dir, "fig_401k_unit_conditional_wald_CPplot.pdf")
   ggplot2::ggsave(pdf_file, fit$plot, width = 8.5, height = 5)
 
-  slopes_file <- file.path(output_dir, "fig_401k_unit_conditional_wald_causalcp_slopes.csv")
+  slopes_file <- file.path(output_dir, "fig_401k_unit_conditional_wald_CPplot_slopes.csv")
   utils::write.csv(fit$slopes, slopes_file, row.names = FALSE)
 
   list(plot_file = pdf_file, slopes_file = slopes_file, slopes = fit$slopes)

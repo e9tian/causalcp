@@ -1,4 +1,4 @@
-Package: causalcp
+Package: CPplot
 Title: Causal CP-Plot Diagnostics
 Version: 0.0.0.9000
 Authors@R: c(
