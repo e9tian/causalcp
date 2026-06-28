@@ -14,12 +14,11 @@ their own preferred models.
 
 ## Installation
 
-Install from GitHub. The repository is still named `causalcp`, but it installs
-the R package `CPplot`:
+Install from GitHub:
 
 ```r
 install.packages("remotes")
-remotes::install_github("e9tian/causalcp")
+remotes::install_github("e9tian/CPplot")
 ```
 
 ## Observational CP Plot
