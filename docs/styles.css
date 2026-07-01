@@ -235,7 +235,7 @@ h3 {
 
 .hero-visual img {
   display: block;
-  width: min(100%, 380px);
+  width: min(100%, 304px);
   height: auto;
   border-radius: 8px;
 }

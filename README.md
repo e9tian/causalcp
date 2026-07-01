@@ -1,6 +1,8 @@
 # CPplot
 
-<img src="docs/assets/cpplot-logo-square-white.png" alt="CPplot logo" width="360">
+<p align="center">
+  <img src="docs/assets/cpplot-logo-square-white.png" alt="CPplot logo" width="360">
+</p>
 
 `CPplot` draws CP plots and local CP plots for causal diagnostic summaries.
 It is developed for the paper:
