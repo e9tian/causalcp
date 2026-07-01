@@ -1,6 +1,6 @@
 # CPplot
 
-![CPplot visual summary](docs/assets/cpplot-memory-hero.png)
+<img src="docs/assets/cpplot-logo-square-white.png" alt="CPplot logo" width="360">
 
 `CPplot` draws CP plots and local CP plots for causal diagnostic summaries.
 It is developed for the paper:

@@ -68,15 +68,10 @@ a:hover {
   width: 42px;
   height: 42px;
   border-radius: 8px;
-  overflow: hidden;
-  background: #fff;
-  border: 1px solid var(--line);
-}
-
-.brand-mark img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  background: var(--teal);
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: 0;
 }
 
 .brand-title {
@@ -240,7 +235,7 @@ h3 {
 
 .hero-visual img {
   display: block;
-  width: 100%;
+  width: min(100%, 380px);
   height: auto;
   border-radius: 8px;
 }
